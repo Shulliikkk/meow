@@ -1,3 +1,4 @@
+### 0. unsigned int -> binary
 ```C++
 #include <iostream>
 
@@ -18,6 +19,7 @@ int main() {
 ```
 ![Текст с описанием картинки](uint_to_bin_2.png)
 
+### 1. float -> binary
 
 ```C++
 #include <iostream>
@@ -45,6 +47,7 @@ int main() {
 
 ![Текст с описанием картинки](float_uint.png)
 
+### 2. Переплонение мантиссы
 
 ```C++
 #include <iostream>
@@ -79,6 +82,7 @@ int main() {
 
 ![Текст с описанием картинки](owerflow.png)
 
+### 3. Бесконечный цикл
 ```C++
 #include <iostream>
 
