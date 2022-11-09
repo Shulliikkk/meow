@@ -11,11 +11,11 @@ GPIO.setup(comp, GPIO.IN)
 def adc():
     k = 0
     for i in range(7, -1, -1):
-        k+=2**i
+        k += 2**i
         GPIO.output(dac, dec2bin(k))
         time.sleep(0.005)
         if GPIO.input(comp) == 0:
-            k-=2**i
+            k -= 2**i
     return k 
 
 def dec2bin(value):
@@ -26,14 +26,15 @@ try:
     result = []
     GPIO.output(troyka, 1)
     time_start = time.time()
-    while -time_start + time.time() < 60:
+    MEASURE_TIME = 60 # ВРЕМЯ ИЗМЕРЕНИЙ, ДЛЯ КАЛИБРОВКИ 10, ДЛЯ ИЗМЕРЕНИЙ 60
+    while -time_start + time.time() < MEASURE_TIME:
         voltage = adc()
         result.append(voltage)
         print(voltage)
     GPIO.output(troyka, 0)
     
-    
-    with open('fintess.txt', 'w') as f:
+    FILE_NAME = 'fintess.txt' # ИМЯ ФАЙЛА
+    with open(FILE_NAME, 'w') as f:
         for res in result:
             f.write(str(res) + '\n')
     f.close()
