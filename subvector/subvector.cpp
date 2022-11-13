@@ -44,7 +44,6 @@ bool push_back(subvector* sv, int d) {
   return true;
 }
 
-
 int pop_back(subvector* sv) {
   if (sv -> top > 0) {
     sv -> top -= 1;
