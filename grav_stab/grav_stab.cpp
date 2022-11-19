@@ -1,6 +1,5 @@
 #include <cmath>
 #include <iostream>
-#include "grav_stab_solver.h"
 
 float* slice(float* mass, int n, int m) {
   float* slice_mass = new float[m - n];
@@ -74,7 +73,6 @@ float** solve(float* y_0, float delta_t, float final_t) {
   return solutions;
 }
 
-/*
 int main() {
   float y_0[] = {6800e3, 0, 0, 8.5e3, 0.001, 0, 0};
   float delta_t = 0.1;
@@ -82,4 +80,3 @@ int main() {
   int N_steps = int(final_time / delta_t);
   float** solutions = solve(y_0, delta_t, final_time);
 }
-*/
