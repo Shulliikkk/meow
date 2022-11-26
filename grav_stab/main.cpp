@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <string>
-#include "grav_stab_solver.h"
 
 float* slice(float* mass, int n, int m) {
   float* slice_mass = new float[m - n];
