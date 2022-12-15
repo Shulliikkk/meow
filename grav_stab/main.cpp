@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <string>
+#include <fstream>
 
 float* slice(float* mass, int n, int m) {
   float* slice_mass = new float[m - n];
@@ -49,14 +50,43 @@ float* right_part(float* y) {
   result[5] = angular_acceleration;
   result[6] = time;
 
+  delete[] position;
+  delete[] velocity;
+
   return result;
 }
 
 float* calc_one_step(float* y, float delta_t) {
   float* result = new float[7];
-  for (int i = 0; i < 6; i++) {
-    result[i] = y[i] + right_part(y)[i] * delta_t;
+  float* k1 = right_part(y);
+
+  float* temp2 = new float[7];
+  for (int i = 0; i < 7; i++) {
+    temp2[i] = y[i] + delta_t / 2 * k1[i];
   }
+  float* k2 = right_part(temp2);
+
+  float* temp3 = new float[7];
+  for (int i = 0; i < 7; i++) {
+    temp3[i] = y[i] + delta_t / 2 * k2[i];
+  }
+  float* k3 = right_part(temp3);
+
+  float* temp4 = new float[7];
+  for (int i = 0; i < 7; i++) {
+    temp4[i] = y[i] + delta_t * k3[i];
+  }
+  float* k4 = right_part(temp4);
+
+  for (int i = 0; i < 6; i++) {
+    result[i] = y[i] + delta_t / 6 * (k1[i] + 2 * (k2[i] + k3[i]) + k4[i]);
+  }
+
+  delete[] k1;
+  delete[] k2;
+  delete[] k3;
+  delete[] k4;
+
   result[6] = y[6];
   return result;
 }
@@ -123,8 +153,21 @@ int main()
     earthsprite.setOrigin(X_earth / 2, Y_earth / 2);
   	earthsprite.setPosition(X / 2, Y / 2);
 
+
+    float y_0[7] = {0};
+    std::string line;
+    std::ifstream init("init.csv"); // окрываем файл для чтения
+    if (init.is_open()) {
+        int i = 0;
+        while (getline(init, line))
+        {
+            y_0[i] = std::stof(line);
+            i += 1;
+        }
+    }
+    init.close();
+
     int i = 0;
-    float y_0[] = {6800e3, 0, 0, 7.6e3, 1, 0, 0};
     float delta_t = 0.1;
     float final_time = 3600 * 6;
     int N_steps = int(final_time / delta_t);
@@ -188,5 +231,17 @@ int main()
         window.draw(t_text);
         window.display();
     }
+
+    for (i = 0; i < N_steps; i++) {
+      delete[] solutions[i];
+    }
+    delete[] solutions;
+    delete[] x;
+    delete[] y;
+    delete[] v_x;
+    delete[] v_y;
+    delete[] phi;
+    delete[] t;
+
     return 0;
 }
