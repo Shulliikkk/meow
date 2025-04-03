@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillSwap MIPT | Exchange Skills with Fellow Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #003366;
+            --secondary: #0066cc;
+            --accent: #ff6b00;
+            --light: #f5f5f5;
+            --dark: #333;
+            --white: #ffffff;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .logo span {
+            color: var(--accent);
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: var(--white);
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
+            color: var(--primary);
+            margin: 0 1.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: var(--white);
+            position: relative;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn:hover {
+            background-color: #e05d00;
+            transform: translateY(-2px);
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 3rem 1rem;
+            background-color: var(--white);
+        }
+        .feature-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 30%;
+            padding: 1.5rem;
+            margin: 1rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        .testimonials {
+            padding: 3rem 1rem;
+            background-color: var(--light);
+            text-align: center;
+        }
+        .testimonial-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            width: 30%;
+            text-align: left;
+        }
+        .testimonial-card img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        .signup {
+            padding: 3rem 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            text-align: center;
+        }
+        .signup-form {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+            font-weight: 600;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        .social-links {
+            margin: 1rem 0;
+        }
+        .social-links a {
+            color: var(--white);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .feature-card, .testimonial-card {
+                width: 100%;
+                margin: 1rem 0;
+            }
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav a {
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Skill<span>Swap</span> MIPT</div>
+        <p>Exchange skills with fellow students – learn and teach in return!</p>
+    </header>
+    <nav>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#signup">Sign Up</a>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Match. Learn. Grow.</h2>
+            <p>Connect with MIPT students who can teach you what you need – and learn from you in return!</p>
+            <a href="#signup" class="btn">Get Started</a>
+        </div>
+    </section>
+    <section id="how-it-works" class="features">
+        <div class="feature-card">
+            <i class="fas fa-list-alt"></i>
+            <h3>1. List Your Skills</h3>
+            <p>What can you teach? Programming, math, languages? Add your expertise and let others benefit from your knowledge.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-search"></i>
+            <h3>2. Request a Skill</h3>
+            <p>Need help with machine learning or lab work? Post what you want to learn and find the perfect mentor.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-handshake"></i>
+            <h3>3. Get Matched</h3>
+            <p>Our smart algorithm connects you with the ideal peer for a mutually beneficial skill exchange.</p>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials">
+        <h2>What Our Users Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="User">
+                <h4>Anna K.</h4>
+                <p>"SkillSwap helped me find a Python mentor in just a day! In return, I taught him quantum mechanics. Win-win!"</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User">
+                <h4>Dmitry S.</h4>
+                <p>"I needed help with lab reports and found an expert. Now we meet weekly to exchange knowledge."</p>
+            </div>
+            <div class="testimonial-card">
+                <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User">
+                <h4>Maria P.</h4>
+                <p>"As an international student, I struggled with Russian. SkillSwap connected me with a language partner!"</p>
+            </div>
+        </div>
+    </section>
+    <section id="signup" class="signup">
+        <h2>Ready to Start Swapping Skills?</h2>
+        <div class="signup-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">MIPT Email</label>
+                    <input type="email" id="email" placeholder="Enter your MIPT email" required>
+                </div>
+                <div class="form-group">
+                    <label for="skill">Primary Skill to Teach</label>
+                    <input type="text" id="skill" placeholder="e.g., Python, Quantum Physics" required>
+                </div>
+                <div class="form-group">
+                    <label for="learn">Skill You Want to Learn</label>
+                    <input type="text" id="learn" placeholder="e.g., Machine Learning, Russian" required>
+                </div>
+                <button type="submit" class="btn">Join SkillSwap</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-vk"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>© 2025 SkillSwap MIPT | Made by MIPT Students for MIPT Students</p>
+        <p>Contact: team@skillswap-mipt.ru</p>
+    </footer>
+</body>
+</html>
